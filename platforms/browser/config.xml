@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.newapp.app" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <feature name="Camera">
+        <param name="browser-package" value="Camera" />
+    </feature>
+    <name>Cambiemos</name>
+    <description>
+        A sample Apache Cordova application that responds to the deviceready event.
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        
+        Apache Cordova Team
+    </author>
+    <icon platform="android" qualifier="ldpi" src="ldpi.png" />
+    <icon platform="android" qualifier="mdpi" src="mdpi.png" />
+    <icon platform="android" qualifier="hdpi" src="hdpi.png" />
+    <icon platform="android" qualifier="xhdpi" src="xhdpi.png" />
+    <icon platform="android" qualifier="xxhdpi" src="xxhdpi.png" />
+    <icon platform="android" qualifier="xxxhdpi" src="xxxhdpi.png" />
+    <icon platform="android" qualifier="fr-xxhdpi" src="fr-xxhdpi.png" />
+    <splash platform="android" qualifier="ldpi" src="ldpi.png" />
+    <splash platform="android" qualifier="mdpi" src="mdpi.png" />
+    <splash platform="android" qualifier="hdpi" src="hdpi.png" />
+    <splash platform="android" qualifier="xhdpi" src="xhdpi.png" />
+    <splash platform="android" qualifier="fr-xhdpi" src="fr-xhdpi.png" />
+    <splash platform="android" qualifier="port-xxhdpi" src="portrait-xxhdpi.png" />
+    <splash platform="android" qualifier="land-xxhdpi" src="landscape-xxhdpi.png" />
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+</widget>

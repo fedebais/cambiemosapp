@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+       
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
+        <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCksoESjy8MorSHj-mru5LjZnxkuEr3a70" type="text/javascript"></script>
+
+
+
+        <title>Cambiemos</title>
+
+
+<style type="text/css">
+  #regiration_form fieldset:not(:first-of-type) {
+    display: none;
+  }
+  </style>
+
+
+     <script type="text/javascript" charset="utf-8">
+    var pictureSource; // picture source
+    var destinationType; // sets the format of returned value 
+
+    // Wait for Cordova to connect with the device
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready to be used!
+    function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+    }
+
+    // Called when a photo is successfully retrieved
+    function onPhotoDataSuccess(imageData) {
+        // Uncomment to view the base64 encoded image data
+        var date = ""
+        var d = new Date();
+        date = "" + d.getDate() + "-" + (d.getMonth() + 1) + "-"
+                + d.getFullYear();
+        alert(date)
+        //alert(imageData);  
+
+        // Get image handle
+        //
+        var smallImage = document.getElementById('smallImage');
+        // Unhide image elements
+        //
+        smallImage.style.display = 'block';
+
+        // Show the captured photo
+        // The inline CSS rules are used to resize the image
+        //
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+
+        alert("data:image/jpeg;base64," + imageData)
+
+        //This part is for saving the capture photo
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+
+        function gotFS(fileSystem) {
+            alert("image/" + date + ".jpeg")
+            fileSystem.root.getFile("image/" + date + ".jpeg", {
+                create : true,
+                exclusive : false
+            }, gotFileEntry, fail);
+        }
+        function gotFileEntry(fileEntry) {
+            fileEntry.createWriter(gotFileWriter, fail);
+        }
+        function gotFileWriter(writer) {
+            var data = "data:image/jpeg;base64," + imageData;
+            writer.write(data);
+
+        }
+        function fail(error) {
+            alert("error")
+            console.log(error.code);
+        }
+    }
+
+    // Called when a photo is successfully retrieved
+    function onPhotoURISuccess(imageURI) {
+        // Uncomment to view the image file URI 
+        // console.log(imageURI);
+
+        // Get image handle
+        var largeImage = document.getElementById('largeImage');
+        // Unhide image elements
+        largeImage.style.display = 'block';
+
+        // Show the captured photo
+        // The inline CSS rules are used to resize the image
+        //
+        largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    function capturePhoto() {
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+            quality : 50,
+            destinationType : destinationType.DATA_URL
+        });
+    }
+
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+            quality : 20,
+            allowEdit : true,
+            destinationType : destinationType.DATA_URL
+        });
+    }
+
+    // A button will call this function
+    function getPhoto(source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, {
+            quality : 50,
+            destinationType : destinationType.FILE_URI,
+            sourceType : source
+        });
+    }
+
+    // Called if something bad happens.
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+    function savePhoto(source) {
+
+    }
+</script>
+    </head>
+    <body>
+
+     <div id="container">
+       
+
+         <div class="logo">
+          
+
+
+        </div>
+         
+ <form id="regiration_form" action="gracias.html"  novalidate>
+  <fieldset>
+    <h4>Tipo de registro</h4>
+    <br>
+
+  <div class="form-group">
+  <select class="form-control" id="sel1">
+    <option>Seleccionar</option>
+    <option>Verde</option>
+    <option>Rojo</option>
+    <option>Amarillo</option>
+  </select>
+</div>
+    <div class="form-group">
+  
+    <input type="text" class="form-control" id="email" name="email" placeholder="Nombre">
+    </div>
+    <div class="form-group">
+   
+    <input type="text" class="form-control" id="password" placeholder="Apellido">
+    </div>
+
+
+  <div class="form-group">
+  <select class="form-control" id="sel1">
+    <option>Genero</option>
+    <option>Femenino</option>
+    <option>Masculino</option>
+  
+  </select>
+</div>
+
+
+      <div class="form-group">
+   
+    <input type="text" class="form-control" id="password" placeholder="DNI">
+    </div>
+
+
+<div class="form-group">
+   
+    <input type="text" class="form-control" id="password" placeholder="Distrito">
+    </div>
+
+   
+
+
+    <input type="button" name="password" class="next btn btn-success btn-block" value="Siguiente" />
+  </fieldset>
+
+   <fieldset>
+    <h4>Datos de contacto</h4>
+    <br>
+
+  <div class="form-group">
+  <select class="form-control" id="sel1">
+    <option>Fiscaliza</option>
+    <option>Si</option>
+    <option>No</option>
+  </select>
+</div>
+    <div class="form-group">
+  
+    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+    </div>
+    <div class="form-group">
+   
+    <input type="text" class="form-control" id="password" placeholder="Telefono">
+    </div>
+
+
+
+   
+
+ <input type="button" name="previous" class="previous btn  btn-success " value="Anterior" />
+    <input style="float: right;" type="button" name="next" class="next btn btn-success " value="Siguiente" />
+  </fieldset>
+
+
+  <fieldset>
+    <h4> Tomar imagen</h4>
+    <br>
+ <br>
+ 
+    <div class="form-group" style="text-align: center;">
+    <img onclick="capturePhoto();" src="img/cam.png" style="max-width: 40%; text-align: center;">
+    </div>
+     <div class="form-group" style="text-align: center;">
+    </div>
+
+   <br>
+    <br>
+ <br>
+ 
+    <input type="button" name="previous" class="previous btn  btn-success " value="Anterior" />
+    <input style="float: right;" type="button" name="next" class="next btn btn-success " value="Siguiente" />
+  </fieldset>
+
+
+    <fieldset>
+    <h4>Ingrese ubicacion</h4>
+    <br>
+
+
+    <div class="form-group">
+  
+    <input type="text" class="form-control" id="email" name="email" placeholder="Direccion">
+    </div>
+
+ <div id="map" >
+
+
+    <div class="form-group">
+  
+
+    </div>
+     </div>
+
+    <input type="button" name="previous" class="previous btn  btn-success " value="Anterior" />
+    <input style="float: right;" type="button" name="next" class="next btn btn-success " value="Siguiente" />
+
+  </fieldset>
+
+
+  <fieldset>
+    <h4>Comentarios finales</h4>
+    <br>
+  
+    <div class="form-group">
+    <textarea  class="form-control" name="address" placeholder="Comenarios"></textarea>
+    </div>
+  
+   
+
+ <input type="button" name="previous" class="previous btn  btn-success " value="Anterior" />
+    <input style="float: right;" type="submit" name="submit" class="submit btn btn-success " value="Enviar" />
+  </fieldset>
+  </form>
+</div>
+       
+      
+
+
+      
+
+        <script> 
+
+$(document).ready(function(){
+  var current = 1,current_step,next_step,steps;
+  steps = $("fieldset").length;
+  $(".next").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().next();
+    next_step.show();
+    current_step.hide();
+    setProgressBar(++current);
+  });
+  $(".previous").click(function(){
+    current_step = $(this).parent();
+    next_step = $(this).parent().prev();
+    next_step.show();
+    current_step.hide();
+    setProgressBar(--current);
+  });
+  setProgressBar(current);
+  // Change progress bar action
+  function setProgressBar(curStep){
+    var percent = parseFloat(100 / steps) * curStep;
+    percent = percent.toFixed();
+    $(".progress-bar")
+      .css("width",percent+"%")
+      .html(percent+"%");   
+  }
+});
+
+
+
+
+
+
+</script>
+
+  <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
