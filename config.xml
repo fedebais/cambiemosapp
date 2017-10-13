@@ -8,10 +8,10 @@
         
         Apache Cordova Team
     </author>
-    <icon platform="android" qualifier="ldpi" src="ldpi.png" />
-    <icon platform="android" qualifier="mdpi" src="mdpi.png" />
-    <icon platform="android" qualifier="hdpi" src="hdpi.png" />
-    <icon platform="android" qualifier="xhdpi" src="xhdpi.png" />
+    <icon platform="android" qualifier="ldpi" src="rec/icon/android/icon-36-ldpi.png" />
+    <icon platform="android" qualifier="mdpi" src="rec/icon/android/icon-48-mdpi.png" />
+    <icon platform="android" qualifier="hdpi" src="rec/icon/android/icon-72-hdpi.png" />
+    <icon platform="android" qualifier="xhdpi" src="rec/icon/android/icon-96-xhdpi.png" />
     <icon platform="android" qualifier="xxhdpi" src="xxhdpi.png" />
     <icon platform="android" qualifier="xxxhdpi" src="xxxhdpi.png" />
     <icon platform="android" qualifier="fr-xxhdpi" src="fr-xxhdpi.png" />
