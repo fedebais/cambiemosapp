@@ -166,6 +166,64 @@
 
     }
 </script>
+
+
+
+<script type="text/javascript">
+	
+ $(document).ready(function()
+ {
+ $("#insert").click(function(){
+
+ var tipo=$("#tipo").val();
+  var nombre=$("#nombre").val();
+ var apellido=$("#apellido").val();
+  var genero=$("#genero").val();
+ 
+ var dni=$("#dni").val();
+   var distrito=$("#distrito").val();
+
+      var fiscaliza=$("#fiscaliza").val();
+         var email=$("#email").val();
+            var telefono=$("#telefono").val();
+  
+
+  var direccion=$("#direccion").val();
+
+  var comentarios=$("#comentarios").val();
+ var dataString="tipo="+tipo+"&nombre="+nombre+"&apellido="+apellido+"&genero="+genero+"&dni="+dni+"&distrito="+distrito+"&fiscaliza="+fiscaliza+"&email="+email+"&telefono="+telefono+"&direccion="+direccion+"&comentarios="+comentarios+"&insert=";
+ if($.trim(nombre).length>0 & $.trim(dni).length>0 & $.trim(direccion).length>0)
+ {
+ $.ajax({
+ type: "POST",
+ url:"http://67.23.231.40/~tablerodegestion/cuentas/app/costa/gracias.php",
+ data: dataString,
+ crossDomain: true,
+ cache: false,
+ beforeSend: function(){ $("#insert").val('Conectando...');},
+ success: function(data){
+ if(data=="success")
+ {
+$('#regiration_form').append('</br></br><div class="alert alert-success"><strong>Bien!</strong> Enviado con exito.</div></br><button type="button" href="dashboard.html" class="btn btn-success" style="width:100%"> <a  href="dashboard.html" style="color:#ffffff; text-decoration: none; " >Cargar Nuevo</a></button>');
+ $("#insert").val('Enviar');
+ }
+ else if(data=="error")
+ {
+ alert("error");
+ }
+ }
+ });
+ }return false;
+ });
+ });
+
+
+
+
+
+
+
+</script>
     </head>
     <body>
 
@@ -178,34 +236,34 @@
 
         </div>
          
- <form id="regiration_form" action="gracias.html"  novalidate>
+ <form id="regiration_form"  novalidate>
   <fieldset>
     <h4>Tipo de registro</h4>
     <br>
 
   <div class="form-group">
-  <select class="form-control" id="sel1">
+  <select class="form-control" id="tipo" name="tipo" id="sel1">
     <option>Seleccionar</option>
-    <option>Verde</option>
-    <option>Rojo</option>
-    <option>Amarillo</option>
+    <option value="1">Verde</option>
+    <option value="2">Rojo</option>
+    <option value="3">Amarillo</option>
   </select>
 </div>
     <div class="form-group">
   
-    <input type="text" class="form-control" id="email" name="email" placeholder="Nombre">
+    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
     </div>
     <div class="form-group">
    
-    <input type="text" class="form-control" id="password" placeholder="Apellido">
+    <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido">
     </div>
 
 
   <div class="form-group">
-  <select class="form-control" id="sel1">
-    <option>Genero</option>
-    <option>Femenino</option>
-    <option>Masculino</option>
+  <select class="form-control" name="genero" id="genero">
+    <option >Genero</option>
+    <option value="0">Femenino</option>
+    <option value="1">Masculino</option>
   
   </select>
 </div>
@@ -213,13 +271,13 @@
 
       <div class="form-group">
    
-    <input type="text" class="form-control" id="password" placeholder="DNI">
+    <input type="text" class="form-control" id="dni" placeholder="DNI">
     </div>
 
 
 <div class="form-group">
    
-    <input type="text" class="form-control" id="password" placeholder="Distrito">
+    <input type="text" class="form-control" id="distrito" placeholder="Distrito">
     </div>
 
    
@@ -233,10 +291,10 @@
     <br>
 
   <div class="form-group">
-  <select class="form-control" id="sel1">
+  <select class="form-control" name="fiscaliza" id="fiscaliza">
     <option>Fiscaliza</option>
-    <option>Si</option>
-    <option>No</option>
+    <option value="1">Si</option>
+    <option value="0">No</option>
   </select>
 </div>
     <div class="form-group">
@@ -245,7 +303,7 @@
     </div>
     <div class="form-group">
    
-    <input type="text" class="form-control" id="password" placeholder="Telefono">
+    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono">
     </div>
 
 
@@ -284,7 +342,7 @@
 
     <div class="form-group">
   
-    <input type="text" class="form-control" id="email" name="email" placeholder="Direccion">
+    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion">
     </div>
 
  <div id="map" >
@@ -307,13 +365,13 @@
     <br>
   
     <div class="form-group">
-    <textarea  class="form-control" name="address" placeholder="Comenarios"></textarea>
+    <textarea  class="form-control" name="comentarios" id="comentarios" placeholder="Comentarios"></textarea>
     </div>
   
    
 
  <input type="button" name="previous" class="previous btn  btn-success " value="Anterior" />
-    <input style="float: right;" type="submit" name="submit" class="submit btn btn-success " value="Enviar" />
+    <input style="float: right;" type="submit" name="submit" id="insert" class="submit btn btn-success " value="Enviar" />
   </fieldset>
   </form>
 </div>
